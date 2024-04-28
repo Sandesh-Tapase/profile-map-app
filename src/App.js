@@ -1,25 +1,44 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import ProfileList from './components/ProfileList';
+import MapContainerComponent from './components/MapContainerComponent';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [selectedProfile, setSelectedProfile] = useState(null);
+
+  const profiles = [
+    {
+      id: 1,
+      name: 'John Doe',
+      description: 'Software Engineer',
+      // Add more profile properties as needed
+    },
+    {
+      id: 2,
+      name: 'Jane Smith',
+      description: 'Web Developer',
+      // Add more profile properties as needed
+    },
+    // Add more profiles as needed
+  ];
+
+  const handleSummaryClick = (profile) => {
+    setSelectedProfile(profile);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>Profile Explorer</h1>
+      <div className="profiles-container">
+        {/* Pass profiles and handleSummaryClick function as props */}
+        <ProfileList profiles={profiles} onSummaryClick={handleSummaryClick} />
+      </div>
+      <div className="map-container">
+        {/* Pass selectedProfile to MapContainerComponent */}
+        <MapContainerComponent selectedProfile={selectedProfile} />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
